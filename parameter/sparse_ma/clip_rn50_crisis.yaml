@@ -1,0 +1,44 @@
+{
+  CONFIG: {
+      dataset_name: 'CrisisMMD_AdvDataset',
+      model_name: 'clip_fusion',      
+      attack_name: 'SparseMA',
+  },
+
+  CrisisMMD_AdvDataset: {
+      data_dir: './data/train_dataset/CrisisMMD_v2.0',
+      mode: 'test',
+      is_bert: False,
+      max_seq_length: 256,
+      bert_dirname: './data/pretrain/bert-base',
+      week_process: True,
+      is_clip: True,
+  },
+
+  clip_fusion: {
+      model_path: './data/model/clip_fusion/CrisisMMD_v2.0_rn50_3',
+      pretrain_path: './data/pretrain/RN50.pt',
+      num_classes: 7,
+      output_dim: 1024,            
+  },
+
+  SparseMA: {
+      synonym_pick_way: 'embedding',
+      synonym_num: 4,                            # Synonym number
+      synonym_embedding_path: './data/aux_files/counter-fitted-vectors.txt',       # The path to the counter-fitting embeddings we used to find synonyms
+      synonym_cos_path:  './data/aux_files/mat.txt',            # The pre-compute the cosine similarity scores based on the counter-fitting embeddings
+      embedding_path: './data/embedding/glove.6B.200d.txt',
+      bert_dirname: "./data/pretrain/bert-base",
+      max_seq_length: 64,
+      batch_size: 64,
+      is_bert: False,
+      patch_side: 20,
+      use_path: './data/aux_files',
+      model_type: 2,
+  },
+
+  Common: {
+    embedding_path: './data/embedding/glove.6B.200d.txt',
+    sample_log_path: './data/adv_data/sparse_ma/clip_rn50_crisis',
+  }
+}

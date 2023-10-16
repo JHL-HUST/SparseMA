@@ -1,0 +1,43 @@
+{
+  CONFIG: {
+      dataset_name: 'MVSA_AdvDataset',
+      model_name: 'ALBEF',      
+      attack_name: 'SparseMA',
+  },
+
+  MVSA_AdvDataset: {
+      data_dir: './data/train_dataset/MVSA',
+      mode: 'test',
+      is_bert: False,
+      max_seq_length: 64,
+      bert_dirname: './data/pretrain/bert-base',
+      week_process: True,
+      is_clip: False,
+  },
+
+  ALBEF: {
+      model_path: './data/model/albef/MVSA',
+      num_classes: 3,
+      # output_dim: 256,            
+  },
+
+  SparseMA: {
+      synonym_pick_way: 'embedding',
+      synonym_num: 4,                            # Synonym number
+      synonym_embedding_path: './data/aux_files/counter-fitted-vectors.txt',       # The path to the counter-fitting embeddings we used to find synonyms
+      synonym_cos_path:  './data/aux_files/mat.txt',            # The pre-compute the cosine similarity scores based on the counter-fitting embeddings
+      embedding_path: './data/embedding/glove.6B.200d.txt',
+      bert_dirname: "./data/pretrain/bert-base",
+      max_seq_length: 64,
+      batch_size: 64,
+      is_bert: False,
+      patch_side: 35,
+      use_path: './data/aux_files',
+      model_type: 1,
+  },
+
+  Common: {
+    embedding_path: './data/embedding/glove.6B.200d.txt',
+    sample_log_path: './data/adv_data/sparse_ma/albef_mvsa',
+  }
+}
